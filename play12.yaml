@@ -1,0 +1,13 @@
+---
+- name: service module
+  hosts: parag
+  tasks:
+  - name: start the http service
+    service:
+      name: httpd
+      state: started
+
+  - name: now stop the nfs service
+    service:
+      name: nfs
+      state: stopped

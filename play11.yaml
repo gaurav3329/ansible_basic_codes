@@ -1,0 +1,8 @@
+---
+- name: copy file in the destination
+  hosts: target
+  tasks:
+  - copy:
+      src: /root/Desktop/modules.docx
+      dest:  /home
+      mode: '0777'

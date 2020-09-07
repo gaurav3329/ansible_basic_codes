@@ -1,0 +1,5 @@
+---
+- hosts: linux
+  tasks:
+  - name: kill a process
+    command: kill -9 13915

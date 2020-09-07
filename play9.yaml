@@ -1,0 +1,9 @@
+---
+- name: to compress a file by archive module
+  hosts: parag
+  tasks:
+  - name: run the archive module
+    archive:
+      path: /root/CentOS-7-x86_64-DVD-1511.iso.zip
+      format: tar
+      remove: yes

@@ -1,0 +1,7 @@
+---
+- hosts: parag
+  tasks:
+  - name: run the pycharm script
+    command: /home/pycharm-community-2020.2.1/bin/pycharm.sh
+#      chdir: /home/pycharm-community-2020.2.1/bin 
+#      cmd: ./pycharm.sh

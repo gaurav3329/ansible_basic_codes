@@ -1,0 +1,7 @@
+---
+- hosts: target1
+  tasks:
+  - name: check the httpd services
+    service:
+      name: httpd
+      state: restarted

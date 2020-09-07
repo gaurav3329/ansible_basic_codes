@@ -1,0 +1,5 @@
+---
+- hosts: target2
+  tasks:
+  - name: run the pycharm script
+    script: /home/pycharm-community-2020.2.1/bin/pycharm.sh

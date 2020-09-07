@@ -1,0 +1,9 @@
+---
+- name: compress a file and exclude a path
+  hosts: target2
+  tasks:
+  - archive:
+      path: /home/*
+      dest: /root/file.zip
+      exclude_path: /home/jail
+      format: zip

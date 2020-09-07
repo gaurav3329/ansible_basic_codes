@@ -1,0 +1,12 @@
+---
+- name: to run the telnet command
+  hosts: parag
+  tasks:
+  - telnet:
+      user: root
+      password: Sipl2020-08
+      login_prompt: "username: "
+      prompts:
+        - "[>#]"
+      command: cat /etc/passwd
+
