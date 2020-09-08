@@ -7,7 +7,17 @@
       name: httpd
       state: started
 
-  - name: now stop the nfs service
-    service:
-      name: nfs
-      state: stopped
+  - name: now stop the service
+    yum: 
+      name: epel-release
+      state: absent
+  
+  - name: to install the nfs package
+    yum:
+      name: epel-release
+      state: installed
+ 
+#  - name: now start the nfs service
+#    service:
+#      name: nfs
+#      state: started

@@ -1,0 +1,50 @@
+---
+- name:  create a set of user and install a set of packages
+  hosts: parag
+  vars:
+  - names:
+    - gaurav
+    - shubham
+    - navin
+    - ram
+  - user1:
+    - shubham
+    - gaurav
+  - user2:
+    - navin
+    - ram
+  - pack1:
+    - httpd
+    - nfs-utils
+  - pack2:
+    - nano
+    - tftp
+  - pack3:
+    - tftp-server
+    - dhcpd
+  tasks:
+  - name: create a set of user
+    user:
+      name: '{{ item }}'
+      password: $1$zagaE8F9$NTpi38me0B.UTLZEVYY0C1
+      state: present
+    with_items:
+      - '{{ names }}'
+  - name: now we have to install the set of software in the user
+    user:
+      name: '{{ item.0 }}'
+    yum:
+      name: '{{ item.1}}'
+      state: installed
+    with_nested:
+      - '{{ user1 }}'
+      - '{{ pack1 }}'
+  - name: now repeat the process for the second user
+    user:
+      name: '{{ item.0 }}'
+    yum:
+      name: '{{ item.1 }}'
+      state: installed
+    with_nested:
+      - '{{ user2 }}'
+      - '{{ pack2 }}'

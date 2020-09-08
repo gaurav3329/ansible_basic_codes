@@ -1,0 +1,18 @@
+---
+- name: remove the user and the set of there home directories
+  hosts: target2
+  vars:
+  - names:
+    - gaurav
+    - ram
+    - navin
+    - shubham
+    
+  tasks:
+  - name: check the user is present or not
+    user:
+      name: '{{ item }}'
+      state: absent
+      remove: yes
+    with_items:
+        - '{{ names }}'

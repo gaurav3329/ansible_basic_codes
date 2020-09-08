@@ -1,0 +1,19 @@
+---
+- name: install the nfs and nfs-lib
+  hosts: parag
+  tasks:
+  - name: install the following packages
+    yum:
+      name: nfs-utils
+      state: installed
+  - name: now check the nfs service  is up and present
+    service:
+      name: nfs
+      state: started
+      enabled: True
+    notify: restart
+  handlers:
+  - name: restart 
+    service:
+      name: nfs
+      state: restarted

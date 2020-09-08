@@ -1,0 +1,23 @@
+---
+- name: test the nested loop
+  hosts: target2
+  vars:
+    names:
+    - gaurav
+    - ansible
+    folder:
+      - new
+      - old
+  tasks:
+  - name: ensure that the user exists
+    user:
+      name: '{{ item }}'
+    with_items:
+        - '{{ names }}'
+  - name: ensure that the folder exists
+    file:
+      path: '/home/{{ item.0}}/{{item.1}}'
+      state: directory
+    with_nested:
+        - '{{ names }}'
+        - '{{ folder }}'

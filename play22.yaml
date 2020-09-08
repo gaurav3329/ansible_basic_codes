@@ -1,0 +1,11 @@
+---
+- name: run the include playbook
+  hosts: target2
+  tasks:
+  - name: includess
+    debug:
+      msg: including the play 23 in this  play
+- name: includes the playbook 
+  include: play23.yaml
+  when: ansible_os_family=='Redhat'
+    

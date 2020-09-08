@@ -1,0 +1,6 @@
+---
+- name: run the play to open the new terminal
+  hosts: parag
+  tasks:
+  - name: run the message script
+    raw: gnome-terminal -x ./root/message.txt

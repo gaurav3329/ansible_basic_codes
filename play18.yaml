@@ -1,0 +1,17 @@
+---
+- name: run the playbook with_fileglob
+  hosts: target2
+  tasks:
+  - name: make sure the destination dirctory is present
+    file:
+      dest: '/etc/copy'
+      state: directory
+    become: True
+  - name: copy the content of the /etc/passwd
+    copy:
+      src: '{{ item }}'
+      dest: '/etc/copy'
+      remote_src: True
+    become: True
+    with_fileglob:
+       - '/etc/*' 

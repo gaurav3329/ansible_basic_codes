@@ -1,0 +1,65 @@
+---
+- name:  create a set of user and install a set of packages
+  hosts: target2
+  vars:
+  - names:
+    - gaurav
+    - shubham
+    - navin
+    - ram
+  - user1:
+    - shubham
+    - gaurav
+  - user2:
+    - navin
+    - ram
+  - pack1:
+    - nano
+    - nfs-utils
+  - pack2:
+    - httpd
+    - tftp
+  tasks:
+  - name: create a set of user
+    user:
+      name: '{{ item }}'
+      password: $1$zagaE8F9$NTpi38me0B.UTLZEVYY0C1
+      state: present
+    with_items:
+      - '{{ names }}'
+  - name: for user1 install the following packages
+    user:
+      name: '{{ item }}'
+    with_items:
+      - '{{ user1 }}'
+  - name: now install the package using yum
+    yum:
+      name: '{{ item.1 }}'
+      state: installed
+    with_nested:
+      - '{{ user1 }}'
+      - '{{ pack1 }}'
+    notify: restart the nfs 
+
+  - name: for user2
+    user:
+      name: '{{ item }}'
+    with_items:
+      - '{{ user2 }}'
+  - name: now install the package for the second user
+    yum:
+      name: '{{ item.1 }}'
+      state: installed
+    with_nested:
+      - '{{ user2 }}'
+      - '{{ pack2 }}'
+    notify: restart  the httpd
+  handlers:
+  - name: restart the nfs
+    service:
+      name: nfs
+      state: restarted
+  - name: restart the httpd
+    service:
+      name: httpd
+      state: restarted

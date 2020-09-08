@@ -1,0 +1,9 @@
+---
+- name: now include the play24 in this play
+  hosts: parag
+  tasks:
+  - debug:
+      msg:  play24
+
+- name: includes the play24
+  include: play24.yaml

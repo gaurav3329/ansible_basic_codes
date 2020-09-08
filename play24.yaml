@@ -1,0 +1,8 @@
+---
+- name: basic for the include playbook
+  hosts: parag
+  tasks:
+  - name: install the nano package
+    yum:
+      name: nano
+      state: installed

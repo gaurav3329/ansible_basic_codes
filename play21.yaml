@@ -1,0 +1,25 @@
+---
+- name: use the  when conditional
+  vars:
+    host:
+    - target1
+    - target2
+    - parag
+    hosts: '{{ task }}'
+    with_items:
+    - '{{ host }}'
+  tasks:
+  - name: print the os family
+    debug:
+      msg: '{{ ansible_os_family }}'
+  - name: ensure that the http service  is updated
+    yum:
+      name: httpd
+      state: latest
+    when: ansible_os_family=='RedHat'
+  - name: ensure that the apache package is updated
+    apt:
+      name: apache2
+      state: latest
+    when: ansible_os_family=='Debian'
+

@@ -1,0 +1,47 @@
+---
+- name: play the nested loops
+  hosts: target2
+  vars:
+    user1:
+      - gaurav
+      - ansible
+
+    user2:
+      - shubham
+      - parag
+
+    pack1:
+      - httpd
+      - epel-release
+
+    pack2:
+      - nano
+      - system-config-kickstart
+
+  tasks:
+  - name: for user1 install the following packages
+    user:
+      name: '{{ item }}'
+    with_items:
+      - '{{ user1 }}'
+  - name: now install the package using yum
+    yum:
+      name: '{{ item.1 }}'
+      state: installed
+    with_nested:
+      - '{{ user1 }}'
+      - '{{ pack1 }}'
+
+  - name: for user2
+    user:
+      name: '{{ item }}'
+    with_items:
+      - '{{ user2 }}'
+  - name: now install the package for the second user
+    yum:
+      name: '{{ item.1 }}'
+      state: installed
+    with_nested:
+      - '{{ user2 }}'
+      - '{{ pack2 }}'   
+

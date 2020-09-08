@@ -1,0 +1,19 @@
+---
+- name: remove the user and the set of there home directories
+  hosts: parag
+  vars:
+  - names:
+    - gaurav
+    - ram
+    - navin
+    - shubham
+    - ansible
+    
+  tasks:
+  - name: check the user is present or not
+    user:
+      name: '{{ item }}'
+      state: absent 
+      remove: yes
+    with_items:
+        - '{{ names }}'

@@ -1,0 +1,11 @@
+---
+- name: install the multiple service
+  hosts: parag
+  tasks:
+  - name: install the tftp and the tftp server
+    yum:
+      name: '{{ item }}'
+      state: installed
+    with_items:
+      - tftp
+      - tftp-server

@@ -1,0 +1,14 @@
+---
+- name: use the conditional loop with_items
+  hosts: parag
+  vars:
+    pack:
+    - nano
+    - system-config-kickstart
+  tasks:
+  - name: install the nano and kickstart 
+    yum:
+      name: '{{ item }}'
+      state: installed
+    with_items:
+      - '{{ pack }}'
