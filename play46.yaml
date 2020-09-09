@@ -1,0 +1,9 @@
+---
+- name: use the at command to create a copy of /etc/passwd
+  hosts: parag
+  tasks:
+  - name: use the archieve module
+    at:
+      command: tar -cvf backup.tar /etc/passwd
+      count: 1
+      units: minutes

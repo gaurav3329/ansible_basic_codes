@@ -1,0 +1,25 @@
+---
+- name: use the package module
+  hosts: target
+  vars:
+  - packets:
+    - httpd
+    - nfs
+
+  tasks:
+  - name: upgrade the nfs and https package
+    service:
+      name: '{{ item }}'
+      state: started
+    with_items:
+      - '{{ packets }}'
+
+  - debug:
+      msg: the http and nfs service are present
+
+  - name: now install the following package
+    package:
+      name:
+      - system-config-kickstart
+      - nfs-utils
+      state: latest

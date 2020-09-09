@@ -1,0 +1,10 @@
+---
+- name: play the with sequence play
+  hosts: parag
+  tasks:
+  - name: create 3 folders
+    file:
+      dest: /home/'{{ item }}'
+      state: touch
+    with_sequence: start=1 end=4
+

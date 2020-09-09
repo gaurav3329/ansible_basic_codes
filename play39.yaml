@@ -1,0 +1,15 @@
+---
+- name: send mail
+  hosts: target
+  tasks:
+  - name: Sending an e-mail using Gmail SMTP servers
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: kumargaurav3320@gmail.com
+      password: en
+      to: navin.waghade@gmail.com
+      subject: Ansible-testing
+      body: this is the test message
+      secure: starttls
+    delegate_to: localhost

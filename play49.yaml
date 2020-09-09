@@ -1,0 +1,10 @@
+---
+- name: use the playbook to create the ext4 filesystem
+  hosts: oracle
+  tasks:
+  - name: create the filesystem on the target
+    filesystem:
+      fstype: ext4
+      dev: /dev/sdd1
+      force: yes
+ 

@@ -1,0 +1,9 @@
+---
+- name: use the at module to schedule the command
+  hosts: parag
+  tasks:
+  - name: use the reboot command after 1 minutes
+    at:
+      command: reboot
+      count: 1
+      units: minutes

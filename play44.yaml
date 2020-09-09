@@ -1,0 +1,26 @@
+---
+- name:  send a file with mail module
+  hosts: target
+  vars:
+    mails:
+    - navin <navin.waghade@gmail.com>
+    - rahul <rahulsismona@gmail.com>
+    - shubham <gurao164@gmail.com>
+    - samveg <singhsamveg.ss@gmail.com>
+  
+  tasks:
+  - name: include the file in the mail module
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: kumargaurav3320@gmail.com
+      password: Gaurav25##
+      to: '{{ item }}'
+      cc: gaurav <gk02205360@softenger.com>
+      subject: the with_sequence playbook
+      attach:
+      - /root/test/play41.yaml
+      secure: starttls
+    with_items:
+      - '{{ mails }}'
+    delegate_to: localhost 

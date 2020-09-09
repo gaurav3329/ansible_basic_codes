@@ -1,0 +1,15 @@
+---
+- name: send mail
+  hosts: target
+  tasks:
+  - name: Sending an e-mail using Gmail SMTP servers
+    mail:
+      host: mail.softenger.com
+      port: 995
+      username: gk02205360@softenger.com
+      password: GAURAV25##
+      to: Gaurav Kumar <kumargaurav3330@gmail.com>
+      subject: Ansible-report
+      body: System {{ ansible_hostname }} has been successfully provisioned.
+      secure: starttls
+    delegate_to: localhost

@@ -1,0 +1,8 @@
+---
+- name: send an email to the root
+  hosts: target
+  tasks:
+  - name: send the mail
+    mail:
+      subject: system {{ ansible_hostname }} has been sucessfully proisned
+    delegate_to: root@192.168.30.165

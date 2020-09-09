@@ -1,0 +1,27 @@
+---
+- name: check the package and start it and give the report through mail
+  hosts: parag
+  vars:
+    pack:
+    - httpd
+    - nfs-utils
+    pack2:
+    - http
+    - nfs
+  tasks:
+  - name: check the package is available or not
+    yum:
+      name: '{{ item }}'
+      state: present
+    with_items: '{{ pack }}'
+
+  - name: now start the service and catch  the pid and processes name
+    service:
+      name: '{{ item }}'
+      state: started
+    with_items:
+    - '{{ pack }}'
+  - name: get the pid and service name
+    raw: ps -ef | grep '{{ item }}' | grep -iv grep | awk '{ print $2,$8 }' >>  /tmp/new.txt
+    with_items:
+      - '{{ pack2 }}'

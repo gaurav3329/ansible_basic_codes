@@ -1,0 +1,14 @@
+---
+- name: sending a mail through the gmail
+  hosts: target
+  tasks:
+  - name: send the mail through the gmail
+    mail:
+      host: smtp@gmail.com
+      port: 587
+      username: kumargaurav3330@gmail.com
+      password: 9771449556
+      to: Shubham Gurao <gurao164@gmail.com>
+      subject: first mail from the automation
+      body: this is my machine ip {{ ansible_all_ipv4_addresses }} please find  it
+    delegate_to: localhost 

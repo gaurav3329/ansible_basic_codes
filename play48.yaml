@@ -1,0 +1,6 @@
+---
+- name: use the package module to install the psutil
+  hosts: parag
+  tasks:
+  - name: use the package module
+    raw: pip install psutil
