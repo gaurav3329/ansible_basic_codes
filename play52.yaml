@@ -1,0 +1,12 @@
+---
+- name: use the parted module to create a partition
+  hosts: oracle
+  tasks:
+  - name: create one partition on the /dev/sdd
+    parted:
+      device: /dev/sdd
+      number: 4
+      part_end: 2GiB
+      state: present
+      flags: [ lvm ]
+      

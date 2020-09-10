@@ -1,0 +1,12 @@
+---
+- name: make a number of user and add  to a group
+  hosts: all
+  tasks:
+  - name: create 5 users
+    user:
+     name: 'trainee{{ item }}'
+     state: present
+     shell: /bin/bash
+     groups: ansible
+     password: $1$/1GdtJVo$ZkILDuR6T5gyD7WZu5/CR/
+    with_sequence: start=1 end=5 stride=1

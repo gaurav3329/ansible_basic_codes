@@ -1,0 +1,12 @@
+---
+- name: create a partition on the target machine
+  hosts: oracle
+  tasks:
+  - name: create a ext4 partition on /dev/sdd
+    parted:
+      device: /dev/sdd
+      number: 1
+      part_end: 5GiB
+      state: present
+      flags: [ lvm ]
+

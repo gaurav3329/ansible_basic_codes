@@ -1,0 +1,28 @@
+---
+- name: just testing
+  hosts: oracle
+  vars:
+    num:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    memo:
+    - 2
+    - 4
+    - 6
+    - 8
+    - 10
+  tasks:
+  - name: create multiple loops
+    parted:
+      device: /dev/sdd
+      number: '{{ item }}'
+      with_items: '{{ num }}'
+      part_end: "{{ item.1 }}GiB"
+      state: present
+      flags: [ lvm ]
+    with_nested:
+      - '{{ num }}'
+      - '{{ memo }}'

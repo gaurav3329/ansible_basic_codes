@@ -1,0 +1,12 @@
+---
+- name: mount the device by the mount module
+  hosts: oracle
+  tasks:
+  - name: mount the /dev/sdd1
+    mount:
+      path: /mymount
+      src: /dev/sdd1
+      fstype: ext4
+      opts: ro,noauto
+      state: mounted
+      
