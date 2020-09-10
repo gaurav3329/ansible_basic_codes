@@ -1,0 +1,11 @@
+---
+- name: remove the device from the sdd
+  hosts: oracle
+  tasks:
+  - name: use the parted module to remove the /dev/sdd1
+    parted:
+      device: /dev/sdd
+      number: 1
+      state: absent
+      
+

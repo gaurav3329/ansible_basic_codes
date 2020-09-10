@@ -1,0 +1,24 @@
+---
+- name: use yhe filesystem mounted and parted module together
+  hosts: oracle
+  tasks:
+  - name: first create the partition
+    parted:
+      device: /dev/sdd
+      number: 1
+      part_end: 5GiB
+      state: present
+
+  - name: create  the filesystem on the available disk
+    filesystem:
+      fstype: ext4
+      dev: /dev/sdd1
+      force: yes
+
+  - name: now mount the partition by file system by ext2 fs
+    mount:
+      path: /mymount
+      src: /dev/sdd1
+      fstype: ext4
+      state: mounted
+
