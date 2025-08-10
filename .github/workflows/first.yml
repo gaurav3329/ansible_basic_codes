@@ -1,4 +1,4 @@
-name: Ansible CI
+name: Ansible CI Checks
 
 on:
   push:
@@ -11,11 +11,11 @@ on:
     - cron: '0 * * * *'
 
 jobs:
-  ansible-check:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -23,17 +23,21 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install Ansible
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ansible
+          pip install yamllint ansible ansible-lint
 
-      - name: Run Ansible Lint
-        run: |
-          pip install ansible-lint
-          ansible-lint playbooks/
+      - name: Run yamllint
+        run: yamllint .
 
-      # Optional: Run a playbook
-      - name: Run Ansible Playbook
+      - name: Ansible syntax check
         run: |
-          ansible-playbook playbooks/site.yml -i inventory.ini
+          ansible-playbook playbooks/site.yml --syntax-check -i inventory.ini
+
+      - name: PowerShell script validation
+        run: |
+          pwsh -Command "Get-ChildItem scripts/*.ps1 | ForEach-Object { Write-Host 'Checking:' $_.Name; Test-ModuleManifest $_.FullName }"
+
+      - name: Run ansible-lint
+        run: ansible-lint playbooks/
