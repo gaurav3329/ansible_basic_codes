@@ -1,0 +1,16 @@
+name: First deploment
+on:
+  workflow_dispatch:
+jobs:
+  linting:
+    name: Lint ansible file
+    runs_on: ubuntu-latest
+
+    steps:
+    - name: Checkout source
+      uses: action/checkout@v2
+    - name: Linting
+      uses: ansible/ansible-lint-action
+      with:
+        targets: |
+          ansible/playbook.yml
